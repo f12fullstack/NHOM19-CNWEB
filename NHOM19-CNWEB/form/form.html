@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 19</title>
+    <link rel="stylesheet" href="./sytle.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Biểu mẫu Thông tin Cá nhân</h1>
+
+        <form   onsubmit="return kiemTraDuLieu();" >
+            <div class="container-item">
+                <label for="ho_ten">Họ và Tên:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="text" id="ho_ten" name="ho_ten">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);" class="input-box">
+                        
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="ngay_sinh">Ngày sinh:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="date" id="ngay_sinh" name="ngay_sinh">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);" class="input-box">
+                    
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="gioi_tinh">Giới tính:</label>
+                <select id="gioi_tinh" name="gioi_tinh">
+                    <option value="nam">Nam</option>
+                    <option value="nu">Nữ</option>
+                    <option value="khac">Khác</option>
+                </select>
+            </div>
+
+            <div class="container-item">
+                <label for="truong">Trường:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="text" id="truong" name="truong">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);" class="input-box">
+
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="lop">Lớp:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="text" id="lop" name="lop">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);" class="input-box">
+                    
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="so_dien_thoai">Số điện thoại:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="tel" id="so_dien_thoai" name="so_dien_thoai">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);" class="input-box">
+                    
+                    </p>
+                </div>
+            </div>
+            <div class="container-item  ">
+                <label for="dia_chi">Địa chỉ:</label>
+                <textarea id="dia_chi" name="dia_chi" rows="4" cols="50"></textarea>
+            </div>
+            <!-- <input type="submit" value="Gửi"> -->
+            <input style="margin-left: 220px ;margin-top: 16px;" type="submit" value="Gửi" 
+            >
+        </form>
+    </div>
+    <script src="./script.js">
+
+    </script>
+</body>
+
+</html>
