@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table.one-line-border {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table.one-line-border th,
+        table.one-line-border td {
+            border-bottom: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+            background-color: white;
+
+        }
+
+        /* table.one-line-border th {
+            background-color:white;
+            font-weight: 400;
+        } */
+    </style>
+</head>
+
+<body>
+    <div style="width: 80%;margin: 50px auto;background-color: aqua;display: flex;border-radius: 6px;">
+        <div style="width: 20%;background-color: antiquewhite;display:block;">
+            <p style="text-align: center;font-weight: 700;">
+                ADMIN
+            </p>
+            <p>Kho</p>
+            <p>Đơn hàng</p>
+            <p>Thêm sản phẩm</p>
+            <p>Khách hàng</p>
+            <p>Logo</p>
+            <p>Logo</p>
+            <p>Logo</p>
+        </div>
+        <div style="width: 80%;background-color:rgb(238, 232, 232);display:block;padding: 16px;">
+            <div style="display: flex;gap: 16px;align-items: center;">
+                <div
+                    style="display: flex;align-items: center;position: relative;justify-content: space-between;background-color: white;padding: 0 10px;gap: 10px;border-radius: 6px;height: 34px;width: 60%;">
+                    <input type="text" style="width: 100%;height: 30px;border:none;border-radius: 8px; outline: none;"
+                        placeholder="Bạn cần gì..." />
+                    <img style="width: 26px;height: 26px;"
+                        src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png" />
+                </div>
+                <span>Trợ giúp</span>
+                <span>Thông báo</span>
+            </div>
+            <div style="display: flex; justify-content:space-between;align-items: center;">
+                <h2>Quản lý kho</h2>
+                <div
+                    style="display: flex; height: 34px;background-color:blue;align-items:center;justify-content: center;">
+                    <p>Xem sản phẩm</p>
+                </div>
+            </div>
+            <div
+                style="border: 1px solid rgb(199, 194, 194);padding: 0 16px 16px 16px;border-radius: 6px;background-color: white;">
+                <div style="display: flex;">
+                    <div
+                        style="padding: 8px 4px ;border-bottom: 2px solid green;font-family: Arial, Helvetica, sans-serif;">
+                        Tất cả sản phẩm
+                    </div>
+                    <div style="padding: 8px 4px ;">
+                        SamSung
+                    </div>
+                    <div style="padding: 8px 4px ;">
+                        Iphone
+                    </div>
+                </div>
+                <div style="display: flex;align-items: center;gap: 16px;margin: 16px 0;">
+                    <p>Lọc sản phẩm</p>
+                    <div
+                        style="display: flex;align-items: center;position: relative;justify-content: space-between;background-color: white;padding: 0 10px;gap: 10px;border-radius: 6px;height: 34px;flex: auto;border: 1px solid rgb(137, 236, 137);">
+                        <input type="text"
+                            style="width: 100%;height: 30px;border:none;border-radius: 8px; outline: none;"
+                            placeholder="Bạn cần gì..." />
+                        <img style="width: 26px;height: 26px;"
+                            src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png" />
+                    </div>
+                </div>
+                <div>
+                    <table class="one-line-border">
+                        <tr>
+                            <th>Hãng</th>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
+                            <th>Đơn giá (VND)</th>
+                            <th>Doanh số</th>
+                        </tr>
+                        <tr>
+                            <td>SamSung</td>
+                            <td>PRD00001</td>
+                            <td>SamSung A23</td>
+                            <td>100</td>
+                            <td>30,000,000</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td>SamSung</td>
+                            <td>PRD00001</td>
+                            <td>SamSung A23</td>
+                            <td>100</td>
+                            <td>30,000,000</td>
+                            <td>80</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

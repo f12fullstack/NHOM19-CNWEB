@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .container {
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            position: relative;
+        }
+
+        .container:hover {
+            transform: scale(1.1);
+            transition: transform 0.5s;
+        }
+
+        @keyframes example {
+            0% {
+                background-color: lightblue;
+                left: 0px;
+                top: 0px;
+            }
+
+            50% {
+                background-color: lightcoral;
+                left: 50px;
+                top: 50px;
+            }
+
+            100% {
+                background-color: lightblue;
+                left: 0px;
+                top: 0px;
+            }
+        }
+
+        .box {
+            width: 50px;
+            height: 50px;
+            background-color: lightblue;
+            position: absolute;
+            animation-name: example;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="box"></div>
+    </div>
+
+</body>
+
+</html>

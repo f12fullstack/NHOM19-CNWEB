@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 19 SHOP</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1429/1429951.png">
+    <link rel="stylesheet" href="../style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body onload="renderOrder()" style="height: 100hv;"> 
+    <header style=" 
+            background-color: #cd1818;
+            padding: 10px 0 0 0;
+            width: 100%;
+            margin: auto;
+            ">
+        <div style="
+            display: flex;
+            position: relative;
+            width: 70%;
+            justify-content: space-between;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            
+           ">
+            <a href="./index.html" style="padding-right: 10%;">
+                <img width="100px" height="34px"
+                    src="https://cdn.haitrieu.com/wp-content/uploads/2021/11/Logo-The-Gioi-Di-Dong-MWG-Y-H.png"
+                    style="object-fit: contain;" />
+            </a>
+            <div
+                style="display: flex;align-items: center;position: relative;justify-content: space-between;background-color: white;padding: 0 10px;gap: 10px;border-radius: 6px;height: 34px;flex: auto;">
+                <input type="text" style="width: 100%;height: 34px;border:none;border-radius: 8px; outline: none;"
+                    placeholder="Bạn cần gì..." />
+                <img style="width: 26px;height: 26px;"
+                    src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png" />
+            </div>
+            <div style="display: flex;justify-content:center;gap: 16px;flex: auto;">
+                <div class="item-nav">
+                    <img src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"
+                        width="26" height="26" />
+                    <span>
+                        Tài khoản & đơn hàng
+                    </span>
+                </div>
+                <div class="item-nav">
+                    <img src="https://cdn-icons-png.flaticon.com/512/625/625230.png" width="26" height="26" />
+                    <span>
+                        Giỏ hàng
+                    </span>
+                </div>
+                <div class="item-nav">
+                    <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" width="26" height="26" />
+                    <span>
+                        24h Công nghệ
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div
+            style="display: flex;background-color:green;align-items:center;justify-content: center;align-items: center;gap: 6px;">
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+
+        </div>
+    </header>
+    <div class="container" style="padding: 32px 0; ">
+        <div style="display: flex;justify-content: space-between;">
+            <div style="width: 56%">
+                <h2 style="padding: 16px 32px;background-color: orange;opacity: 0.8;">
+                    Giỏ hàng
+                </h2>
+                <div style="padding: 16px 0;" id="list-order">
+                    
+                  
+                </div>
+            </div>
+
+            <div style="width: 40%;">
+                <div style="width: 68%;">
+                    <h2>Tổng</h2>
+                    <div style="margin: 20px 0;height: 1px;border: 1px; border-style: dashed;" class="col"></div>
+                    <div style="display: flex;justify-content: space-between;">
+                        <h3>Thành tiền</h3>
+                        <span id="total_amount" style="font-size: 1.3rem;color: orange;font-weight: 600;">0 VND</span>
+                    </div>
+                            <div id="myForm" style="display: none;border: 1px solid gray;padding: 16px;border-radius: 8px;">
+                                <h3>Thông tin người đặt hàng</h3>
+                                <form onsubmit="return submitForm();">
+                                    <div class="container-item">
+                                        <label for="ho_ten">Họ và Tên:</label>
+                                        <div style="position: relative;flex: auto;">
+                                            <input type="text" id="ho_ten" name="ho_ten">
+                                            <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);"
+                                                class="input-box">
+                            
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="container-item">
+                                        <label for="so_dien_thoai">Số điện thoại:</label>
+                                        <div style="position: relative;flex: auto;">
+                                            <input type="text" id="so_dien_thoai" name="so_dien_thoai">
+                                            <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);"
+                                                class="input-box">
+                            
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="container-item">
+                                        <label for="email">Email:</label>
+                                        <div style="position: relative;flex: auto;">
+                                            <input type="text" id="email" name="email">
+                                            <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);" class="input-box">
+                                    
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="container-item">
+                                        <label for="dia_chi">Địa chỉ:</label>
+                                        <input id="dia_chi" name="dia_chi"  />
+                            
+                                    </div>
+                                </form>
+                            </div>
+                    <button
+                        onclick="openForm()"
+                        id="btn-order"
+                        style="cursor: pointer;display:none; width: 100%;padding: 20px 0;margin: 16px 0;color: aliceblue;background-color: #FF4500;border: #FF4500;">
+                        <h2>Đặt hàng</h2>
+                    </button>
+
+          
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   
+    <script src="./javascript.js">
+
+
+    </script>
+</body>
+
+</html>

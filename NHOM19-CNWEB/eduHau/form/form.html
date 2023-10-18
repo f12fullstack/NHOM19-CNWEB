@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 19</title>
+    <link rel="stylesheet" href="./sytle.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Biểu mẫu Thông tin Cá nhân</h1>
+
+        <form onsubmit="return kiemTraDuLieu();">
+            <div class="container-item">
+                <label for="ho_ten">Họ và Tên:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="text" id="ho_ten" name="ho_ten">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);"
+                        class="input-box">
+
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="ngay_sinh">Ngày sinh:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="date" id="ngay_sinh" name="ngay_sinh">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);"
+                        class="input-box">
+
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="gioi_tinh">Giới tính:</label>
+                <select id="gioi_tinh" name="gioi_tinh">
+                    <option value="nam">Nam</option>
+                    <option value="nu">Nữ</option>
+                    <option value="khac">Khác</option>
+                </select>
+            </div>
+
+            <div class="container-item">
+                <label for="truong">Trường:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="text" id="truong" name="truong">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);"
+                        class="input-box">
+
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="lop">Lớp:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="text" id="lop" name="lop">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);"
+                        class="input-box">
+
+                    </p>
+                </div>
+            </div>
+            <div class="container-item">
+                <label for="so_dien_thoai">Số điện thoại:</label>
+                <div style="position: relative;flex: auto;">
+                    <input type="tel" id="so_dien_thoai" name="so_dien_thoai">
+                    <p style="position: absolute;bottom: -18px;font-size: 0.8rem;color: rgb(233, 34, 34);"
+                        class="input-box">
+
+                    </p>
+                </div>
+            </div>
+            <div class="container-item  ">
+                <label for="dia_chi">Địa chỉ:</label>
+                <textarea id="dia_chi" name="dia_chi" rows="4" cols="50"></textarea>
+            </div>
+            <!-- <input type="submit" value="Gửi"> -->
+            <input style="margin-left: 220px ;margin-top: 16px;" type="submit" value="Gửi">
+        </form>
+    </div>
+    <script src="./script.js">
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+<!-- <a id="test" class="cart-product col-4 col-md-4"
+        href="./ProductDetail.html?param1=Điện thoại&param2=SamSung&id_product=${item.id}">
+        <div style="
+                                        width: 100%;
+                                        height:100%;
+                                        display: flex;
+                                        background-image: url('https://funky.vn/admin/img/my_frame/khung%20(22).png');
+                                        background-size:contain;
+                                        background-repeat: no-repeat;
+                                        border-radius: 6px;
+                                        padding: 0% 10% 5% 10%; 
+                                        align-items: center;
+                                        justify-content:center;
+                                        ">
+    
+            <img class="img-product" src=${item.product.image} />
+        </div>
+        <div
+            style="width: 100%;align-items: center;gap: 16px;padding: 16px;padding-top: 0;display: flex;flex-direction: column;gap: 16px;">
+            <div>
+                <p style="font-size: 0.9rem;font-weight: 600;color: #474C51;">
+                    ${item.product.name}
+                </p>
+            </div>
+            <div>
+                <p style="font-size: 1.1rem;font-weight: 600;color: #EF8573;">
+                    ${item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} VNĐ
+                </p>
+            </div>
+            <div
+                style="width:100%;height: 26px;background-color: #ddd;align-items: center;text-align: center;position: relative;border-radius: 16px;z-index: 0;">
+                <img style="position: absolute;left:-46%;bottom: 0;z-index: 1;" width="36px" height="36px"
+                    src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png" />
+    
+                <div
+                    style="height: 26px;background-color: #fcb500;position: absolute;z-index: -1;border-radius: 16px;top: 0;width: 70%;">
+                </div>
+                <p style="position:absolute;top: 0;text-align: center;width: 100%;padding-top:3px;left:6px ;"> Còn 4/9
+                    sản phẩm</p>
+            </div>
+        </div>
+    </a> -->
+
+
+
+
+
+
+<!-- <div
+                                onclick="console.log('1233')"
+                                style="align-items: center;text-align: center;padding: 6px 0;flex: auto;border-radius: 6px;background-color: #434A56;cursor: pointer;">
+                                <p style="font-size: 0.8rem;font-weight: 600;color:white;">512 GB </p>
+                            </div>
+                            <div
+                                style="align-items: center;text-align: center;padding: 6px 0;flex: auto;border-radius: 6px;">
+                                <p style="font-size: 0.8rem;font-weight: 600;color: #474C51;">512 GB </p>
+                            </div>
+                            <div
+                                style="align-items: center;text-align: center;padding: 6px 0;flex: auto;border-radius: 6px;">
+                                <p style="font-size: 0.8rem;font-weight: 600;color: #474C51;">512 GB </p>
+                            </div> -->
+
+
+<!-- <a class="cart-product col-3 col-md-3" href="./ProductDetail.html?param1=Điện thoại&param2=SamSung">
+    <div style="
+            width: 100%;
+            background-image: url('https://funky.vn/admin/img/my_frame/khung%20(22).png');
+            background-size:contain;
+            background-repeat: no-repeat;
+            border-radius: 6px;
+            padding: 20%;
+            align-items: center;
+            ">
+
+        <img class="img-product"
+            src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-tim-thumb-600x600.jpg" />
+    </div>
+    <div
+        style="width: 100%;align-items: center;text-align: center;gap: 16px;padding: 16px;padding-top: 0;display: flex;flex-direction: column;gap: 16px;">
+        <div>
+            <span style="font-size: 1.5rem;font-weight: bold;">
+                iphone 14 pro max 125GB
+            </span>
+        </div>
+        <div>
+            <span style="font-size: 1.3rem;font-weight: 600;">
+                25.635.100Đ
+            </span>
+        </div>
+        <div
+            style="width:100%;height: 26px;background-color: #ddd;align-items: center;text-align: center;position: relative;border-radius: 16px;z-index: 0;">
+            <img style="position: absolute;left:-46%;bottom: 0;z-index: 1;" width="36px" height="36px"
+                src="https://img.tgdd.vn/imgt/f_webp,fit_outside,quality_100/https://cdn.tgdd.vn/mwgcart/mwgcore/ContentMwg/images/fs-iconfire.png" />
+
+            <div
+                style="height: 26px;background-color: #fcb500;position: absolute;z-index: -1;border-radius: 16px;top: 0;width: 70%;">
+            </div>
+            <p style="position:absolute;top: 0;text-align: center;width: 100%;padding-top:3px ;">Còn 4/9
+                sản phẩm</p>
+        </div>
+    </div>
+</a> -->

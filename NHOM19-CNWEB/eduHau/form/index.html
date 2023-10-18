@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <button onclick="">
+        gggg
+    </button>
+    <script>
+        axios.get("https://4a6a-58-187-156-4.ngrok-free.app/cards")
+            .then(function (response) {
+                // Dữ liệu JSON đã được tự động phân tích và lưu trong response.data
+                var categories = response.data;
+
+                // Bây giờ bạn có thể sử dụng biến 'categories' để làm bất kỳ điều gì bạn muốn với dữ liệu JSON này
+                console.log(categories); // In dữ liệu ra console
+            })
+            .catch(function (error) {
+                console.error("Lỗi khi gửi yêu cầu: " + error);
+            });
+    </script>
+</body>
+
+</html>

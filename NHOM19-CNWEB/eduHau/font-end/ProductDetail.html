@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 19 SHOP</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1429/1429951.png">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body onload="callAPIDetail()">
+    <header style=" 
+            background-color: #cd1818;
+            padding: 10px 0 0 0;
+            width: 100%;
+            margin: auto;
+            ">
+        <div style="
+            display: flex;
+            position: relative;
+            width: 70%;
+            justify-content: space-between;
+            margin: 0 auto;
+            flex-wrap: wrap;
+           ">
+            <a href="./index.html" style="padding-right: 10%;">
+                <img width="100px" height="34px"
+                    src="https://cdn.haitrieu.com/wp-content/uploads/2021/11/Logo-The-Gioi-Di-Dong-MWG-Y-H.png"
+                    style="object-fit: contain;" />
+            </a>
+            <div
+                style="display: flex;align-items: center;position: relative;justify-content: space-between;background-color: white;padding: 0 10px;gap: 10px;border-radius: 6px;height: 34px;flex: auto;">
+                <input type="text" style="width: 100%;height: 34px;border:none;border-radius: 8px; outline: none;"
+                    placeholder="Bạn cần gì..." />
+                <img style="width: 26px;height: 26px;"
+                    src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png" />
+            </div>
+            <div style="display: flex;justify-content:center;gap: 16px;flex: auto;">
+                <div class="item-nav">
+                    <img src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"
+                        width="26" height="26" />
+                    <span>
+                        Tài khoản & đơn hàng
+                    </span>
+                </div>
+                <a href="./Cart.html" class="item-nav">
+                    <img src="https://cdn-icons-png.flaticon.com/512/625/625230.png" width="26" height="26" />
+                    <span>
+                        Giỏ hàng
+                    </span>
+                </a>
+                <div class="item-nav">
+                    <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" width="26" height="26" />
+                    <span>
+                        24h Công nghệ
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div
+            style="display: flex;background-color:green;align-items:center;justify-content: center;align-items: center;gap: 6px;">
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+
+        </div>
+    </header>
+    <div style="padding: 16px;" class="container">
+        <a href="./index.html">
+            Trang chủ
+        </a>
+        <span id="link-current">
+
+        </span>
+    </div>
+    <div class="container" style="padding: 0 16px;">
+        <span style="font-weight: 500;font-size: 1.4rem;color: #16191D;" id="name-product">
+            iphone
+        </span>
+    </div>
+    <div class="container" style="display: flex;padding: 20px;justify-content: space-between;">
+        
+        <div style="width: 40%;">
+            <div id="image-product-detail" style="padding: 30% 5% ;border: 1px solid red;background-image: url('https://funky.vn/admin/img/my_frame/khung%20(55).png');  background-repeat: no-repeat;
+                background-size:cover;
+                background-color: white;
+                justify-content: center;
+
+                ">
+
+                <div style="width: 100%;position: relative;">
+                    <div class="slider" id="slider-detail-product">
+                            <div  class="slide" id="item-1" style="padding: 0% 10% 10% 10%;">
+                                
+                            </div>
+                            <a class="slide" id="item-2" style="padding: 0% 10% 10% 10%;">
+                               
+                            </a>
+                            <a  class="slide" id="item-3" style="padding: 0% 10% 10% 10%;">
+                                
+                            </a>
+                    </div>
+                    <button class="prev-btn" style="width: 40px;height: 40px;"  onclick="prevSlide()">
+                        <img src="https://clipart-library.com/images_k/arrow-icon-png-transparent/arrow-icon-png-transparent-14.png"
+                            width="16px" height="20px" />
+                    </button>
+                    <button class="next-btn" style="width: 40px;height: 40px;" onclick="nextSlide()">
+                        <img src="https://www.freeiconspng.com/thumbs/arrow-icon/arrow-icon--myiconfinder-23.png" width="16px"
+                            height="20px" />
+                    </button>
+                </div>
+            </div>
+
+            
+            <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+
+                <div style="display: flex;align-items: center;">
+                    <img style="display: flex;width: 36px;height: 36px;"
+                        src="https://png.pngtree.com/png-clipart/20230419/original/pngtree-badge-flat-icon-png-image_9067280.png" />
+                    <span>
+                        Hành chính hàng - Bảo hành 12 tháng
+                    </span>
+                </div>
+                <div style="display: flex;align-items: center;gap: 10px;">
+                    <img style="display: flex;width: 36px;height: 36px;"
+                        src="https://icon-library.com/images/free-shipping-icon-png/free-shipping-icon-png-15.jpg" />
+                    <span>
+                        Hành chính hàng - Bảo hành 12 tháng
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div style="width: 58%;padding:16px ;border-radius: 16px; background-color: white;">
+            <h1 id="price-detail" style="color: #EA3323;">
+                19.000.000
+            </h1>
+            <div style="display: flex;margin: 16px 0;" id="detail-rom">
+
+            </div>
+            <div style="display: flex;gap: 10px;margin: 16px 0;"
+            id="product-color"
+            >
+    
+            </div>
+            <div style="background-color: white;padding: 8px 16px;border-radius: 16px;">
+                <h2 style="padding: 10px 0;">Thông số kỹ thuật</h2>
+                <div style="margin-bottom: 16px;" id="table-detail">
+
+                </div>
+            </div>
+            <div style="margin-top: 16px;">
+                <button 
+                onclick="handleOrder()"
+                style=" cursor: pointer; width: 100%;height: 70px;border-radius: 8px;border: 1px solid #BA2012;background-color: #ED5345;">
+                    <h2 style="color: white;">Mua ngay</h2>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="container" style="margin-top: 16px;">
+        <div style="width: 56%;padding: 16px 20px;background-color: white;border-radius: 8px;">
+            <h3 style="padding-bottom: 16px;">Đặc điểm nổi bật của sản phẩm</h3>
+            <div>
+                <img
+                    src="https://images.fpt.shop/unsafe/fit-in/665x374/filters:quality(100):fill(white)/fptshop.com.vn/Uploads/Originals/2022/3/4/637819900811256939_samsung-galaxy-s22-128gb-quay-video-dem.png" />
+            </div>
+            <h3 style="text-align: center;padding: 16px 0;" id="assess-product">
+                Đánh giá chi tiết Samsung Galaxy S22 5G 128GB
+            </h3>
+            <span id="assess-detail">
+                Samsung Galaxy S22 là bước nhảy vọt trong công nghệ video trên thế hệ di động. Đồng thời, điện thoại
+                cũng mở ra loạt cải
+                tiến đột phá hàng đầu hiện nay từ màn hình vát phẳng “nịnh” mắt đến bộ xử lý 4nm tiên tiến đầu tiên trên
+                thế hệ
+                smartphone Samsung.
+            </span>
+            <h3 style="padding: 16px 0;">
+                Kiệt tác của tinh thần sáng tạo
+            </h3>
+            <span>
+                Kiệt tác Samsung Galaxy S22 sở hữu thiết kế Contour-Cut tràn đầy tính sáng tạo, khung máy hoàn thiện
+                liền mạch với cụm
+                camera, giúp tổng thể cực kì hài hòa. Sự kết hợp giữa chuẩn chống nước/bụi IP68 với chất liệu Armor
+                Aluminium cho khung
+                máy – hợp kim nhôm cứng cáp nhất trên thị trường, Galaxy S22 có độ bền đáng kinh ngạc.
+            </span>
+            <img style="padding-top: 16px;"
+                src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/Uploads/images/2015/Tin-Tuc/11/thiet-ke-Samsung-Galaxy-S22-2.jpg" />
+        </div>
+        <div style="width: 40%;">
+
+        </div>
+    </div>
+    <script src="./javascript.js"></script>
+</body>
+
+</html>

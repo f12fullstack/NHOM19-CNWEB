@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhóm 19 SHOP</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1429/1429951.png">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body onload="callAPI()">
+    <header style=" 
+        background-color: #cd1818;
+        padding: 10px 0 0 0;
+        width: 100%;
+        margin: auto;
+        ">
+        <div style="
+        display: flex;
+        width: 70%;
+        justify-content: space-between;
+        margin: 0 auto;
+        flex-wrap: wrap;
+       ">
+            <div style="padding-right: 10%;">
+               <div
+                style="margin-left: 50px;display: flex;flex-direction:row;align-items: center;gap: 6px;position: relative;max-width: fit-content;">
+                <img style="width: 36px;height: 36px;" src="https://cdn-icons-png.flaticon.com/512/1429/1429951.png" />
+            
+                <i style="font-family: 'Roboto Slab', serif;font-size: 1.4rem;font-weight: 600;color:  #fcb500;">
+                    ShopTeam
+                </i>
+                <i
+                    style="font-family: 'Roboto Slab', serif;font-size: 1.9rem;font-weight: 600;color:  #fcb500;position: absolute;right: -32px;top: 3px;">19</i>
+                <i
+                    style="font-family: 'Roboto Slab', serif;font-size: 0.5rem;font-weight: 600;color:  #fcb500;position: absolute;right: 0;bottom: -0.5px;">20cn5</i>
+            </div> 
+            </div>
+            
+            <div
+                style="display: flex;align-items: center;position: relative;justify-content: space-between;background-color: white;padding: 0 10px;gap: 10px;border-radius: 6px;height: 34px;flex: auto;">
+                <input type="text" style="width: 100%;height: 34px;border:none;border-radius: 8px; outline: none;"
+                    placeholder="Bạn cần gì..." />
+                <img style="width: 26px;height: 26px;"
+                    src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png" />
+            </div>
+            <div style="display: flex;justify-content:center;gap: 16px;flex: auto;">
+                <div class="item-nav">
+                    <img src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"
+                        width="26" height="26" />
+                    <span>
+                        Tài khoản & đơn hàng
+                    </span>
+                </div>
+                <a href="./Cart.html" class="item-nav">
+                    <img src="https://cdn-icons-png.flaticon.com/512/625/625230.png" width="26" height="26" />
+                    <span>
+                        Giỏ hàng
+                    </span>
+                </a>
+                <div class="item-nav">
+                    <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" width="26" height="26" />
+                    <span>
+                        24h Công nghệ
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div
+        class="hello"
+            style="display: flex;background-color:green;align-items:center;justify-content: center;align-items: center;gap: 6px;position: relative;z-index: 10;">
+            <span class="btn-nav btn-test">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            <span class="btn-nav">
+                Điện thoại
+            </span>
+            
+            <div class="container-nav">
+                <div style="width: 30%;">
+                    <h4 style="padding-top: 8px;padding-bottom: 6px;">
+                        Hãng sản phẩm
+                    </h4>
+                    <div class="list-drop" style="display: flex;flex-wrap: wrap;">
+                        <p style="width: 33%;">SamSung</p>
+                        <p style="width: 33%;">SamSung</p>
+                        <p style="width: 33%;">SamSung</p>
+                        <p style="width: 33%;">SamSung</p>
+                        <p style="width: 33%;">SamSung</p>
+                    </div>
+
+                </div>
+                <div
+                    style="width: 20%;border: 1px solid rgba(0, 0, 0, 0.2);padding: 0 10px;border-bottom: 0;border-top: 0;">
+                    <h4 style="padding: 10px 0;">
+                        Mức giá
+                    </h4>
+                    <p>Dưới 2 triệu</p>
+                    <p>Từ 2 - 4 triệu</p>
+                    <p>Từ 2 - 4 triệu</p>
+                    <p>Từ 2 - 4 triệu</p>
+                    <p>Từ 2 - 4 triệu</p>
+                    <p>Từ 2 - 4 triệu</p>
+                </div>
+                <div style="width: 40%;padding: 0 10px;">
+                    <h4 style="padding: 10px 0;">
+                        Hãng sản phẩm
+                    </h4>
+                    <img style="width: 50%;"
+                        src="https://images.fpt.shop/unsafe/fit-in/248x248/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/30/638290066446778426_H4.png" />
+                </div>
+            </div>
+        </div>
+    </header>
+    <div style="width: 80%;margin: auto;position: relative;">
+        <div>
+            <img
+                src="https://images.fpt.shop/unsafe/fit-in/filters:quality(80):fill(transparent)/fptshop.com.vn/Uploads/Originals/2023/9/22/638309774538745127_Frame%201000004439.png" />
+        </div>
+
+        <div style="display: flex;">
+            <div style="width: 65%;position: relative;">
+                <div class="slider">
+                    <a href="./ProductDetail.html" class="slide"><img
+                            src="https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/22/638309954144004095_F-H1_800x300.png"
+                            alt="Slide 1">
+                    </a>
+                    <a href="./ProductDetail.html" class="slide"><img
+                            src="https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/9/27/638314059669150960_F-H1_800x300%20(6).png"
+                            alt="Slide 2">
+                    </a>
+                    <a href="./ProductDetail.html" class="slide"><img
+                            src="https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/31/638290991513394994_F-H1_800x300@2x.png"
+                            alt="Slide 3">
+                    </a>
+                </div>
+                <button class="prev-btn" onclick="prevSlide()">
+                    <img src="https://clipart-library.com/images_k/arrow-icon-png-transparent/arrow-icon-png-transparent-14.png"
+                        width="36px" height="36px" />
+                </button>
+                <button class="next-btn" onclick="nextSlide()">
+                    <img src="https://www.freeiconspng.com/thumbs/arrow-icon/arrow-icon--myiconfinder-23.png"
+                        width="36px" height="36px" />
+                </button>
+            </div>
+            <div style="width: 35%;">
+                <img
+                    src="https://images.fpt.shop/unsafe/fit-in/385x100/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/21/638282131957313690_H2_385x100.png">
+                <img
+                    src="https://images.fpt.shop/unsafe/fit-in/385x100/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/1/638264776251597698_H2_385x100iP13 1.png" />
+            </div>
+        </div>
+
+        <div class="selection" style="display: flex;flex-wrap: wrap;width: 100%;margin-top: 16px;">
+            <a href="./ListProduct.html?param1=Điện thoại&param2=1" class="item-selection">
+                <div
+                    style="background-color: gray;padding: 10px;border-radius: 100%;width: 100px;height: 100px;margin: auto;">
+                    <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/t/_/t_m_18_1_3_2.png" width="80px"
+                        height="80px" />
+                </div>
+                <span style="margin-top: 16px;">
+                    Điện thoại
+                </span>
+            </a>
+            <a href="./ListProduct.html?param1=Laptop&param2=1"
+                style="display: flex;flex-direction: column;align-items:center;text-align: center; justify-content: center;width: 25%;padding: 16px;border: 1px solid grey;background-color: white;">
+                <div
+                    style="background-color: gray;padding: 10px;border-radius: 100%;width: 100px;height: 100px;margin: auto;">
+                    <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/t/_/t_m_18_1_3_2.png" width="80px"
+                        height="80px" />
+                </div>
+                <span style="margin-top: 16px;">
+                    Điện thoại
+                </span>
+            </a>
+            <div
+                style="display: flex;flex-direction: column;align-items:center;text-align: center; justify-content: center;width: 25%;padding: 16px;border: 1px solid grey;background-color: white;">
+                <div
+                    style="background-color: gray;padding: 10px;border-radius: 100%;width: 100px;height: 100px;margin: auto;">
+                    <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/t/_/t_m_18_1_3_2.png" width="80px"
+                        height="80px" />
+                </div>
+                <span style="margin-top: 16px;">
+                    Điện thoại
+                </span>
+            </div>
+            <div
+                style="display: flex;flex-direction: column;align-items:center;text-align: center; justify-content: center;width: 25%;padding: 16px;border: 1px solid grey;background-color: white;">
+                <div
+                    style="background-color: gray;padding: 10px;border-radius: 100%;width: 100px;height: 100px;margin: auto;">
+                    <img src="https://cdn2.cellphones.com.vn/x/media/catalog/product/t/_/t_m_18_1_3_2.png" width="80px"
+                        height="80px" />
+                </div>
+                <span style="margin-top: 16px;">
+                    Điện thoại
+                </span>
+            </div>
+        </div>
+
+        <div style="background-color: aliceblue;padding-bottom: 16px;margin-top: 16px;border-radius: 8px;">
+            <h2 style="padding: 16px 0;margin-left: 16px;font-weight: 600;color: #BA2012;">
+                Khuyến mãi hot
+            </h2>
+
+            <div style="display: flex;flex-wrap: wrap;gap: 8px;padding-left: 1%;" id="promotion">
+                
+             
+                
+            </div>
+        </div>
+        <div>
+
+        </div>
+
+    </div>
+    <footer
+        style="display: flex;background-color: #fcb500;justify-content: center;width: 100%;padding: 24px 10%;margin-top: 32px;">
+        <div style="width: 25%;">
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Chính sách bảo mật
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+        </div>
+        <div style="width: 25%;">
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+        </div>
+        <div style="width: 25%;">
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+        </div>
+        <div style="width: 25%;">
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+            <p>
+                Giới thiệu về công ty
+            </p>
+        </div>
+
+    </footer>
+
+
+    <script src="./javascript.js">
+
+
+    </script>
+</body>
+
+</html>
