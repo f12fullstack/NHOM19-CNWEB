@@ -89,6 +89,7 @@ function handleDownTotal(index) {
 }
 function renderOrder() {
     var dataItemsListOrder = JSON.parse(localStorage.getItem('savedListProduct'));
+    document.getElementById('list-order').innerHTML=''
     var totalAmount = 0;
     document.getElementById("btn-order").style.display = "none";
     console.log(dataItemsListOrder);
@@ -625,9 +626,11 @@ function openForm() {
        
     } else {
         console.log("123");
-            callAPICreateUser();
+        callAPICreateUser();
 
-            callAPICreateOrder();
+        callAPICreateOrder();
+        alert("Đặt hàng thành công!");
+            window.location.href='./Singlemenu.html'
             console.log("1234");
             // localStorage.removeItem('user_Info')
     }
@@ -823,7 +826,7 @@ function renderOrderBill (e){
 
                                     <div style=" width: 30%;align-items: center;text-align: center;">
                                         <h4>Tổng tiền</h4>
-                                        <h4 style="margin-top: 32px;color: orange;">${item?.into_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</h4>
+                                        <h4 style="margin-top: 32px;color: orange;">${item?.total_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</h4>
 
                                     </div>
                                 </div>
