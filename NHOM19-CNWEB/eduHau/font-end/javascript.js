@@ -633,6 +633,208 @@ function openForm() {
     }
 }
 
+function callAPIgetOrder(){
+
+    const id_user = JSON.parse(localStorage.getItem('user_Info'))
+    console.log(id_user.id);
+    axios.get(`http://localhost:8080/orders/${id_user.id}`)
+        .then((e) => {
+            // console.log(e.data);
+
+            // let data = document.getElementById('list-order-bill');
+
+            // document.getElementById('user-name').innerText = 'Họ tên: ' + id_user?.full_name;
+            // document.getElementById('user-phone').innerText = 'Số điện thoại: ' + id_user?.phone_number;
+            // document.getElementById('user-address').innerText = 'Địa chỉ: ' + id_user?.address;
+            // document.getElementById('user-email').innerText = 'Email: ' + id_user?.email;
+            // e.data.map((item) => {
+            //     data.innerHTML +=
+            //       `
+            //       <div style="padding: 16px;background-color: azure;border-radius: 10px;margin-top: 16px;">
+            //                 <div
+            //                     style="display: flex;justify-content: space-between;padding-bottom: 8px;border-bottom: 1px solid rgb(158, 139, 139);">
+            //                     <span style="font-weight: 600;">
+            //                         Đơn hàng
+            //                     </span>
+            //                     <span style="font-weight: 500;">
+            //                         ${item?.status ? 'Đã nhận' : 'Chưa nhận'}
+            //                     </span>
+            //                 </div>
+            //                 <div style="padding-top: 16px;">
+            //                     <div style="display: flex;">
+            //                         <div style="display: block;width: 78%;">
+            //                                 ${item?.order_detail.map((items)=>
+            //                                     `
+            //                                     <div style="width: 100%;">
+            //                                 <div>
+            //                                     <div style="display: flex;">
+            //                                         <div style="width: 30%;">
+            //                                             <img src=${items?.product_detail?.image} />
+            //                                         </div>
+
+            //                                         <div style="width: 100%;padding: 0 32px;">
+            //                                             <h3>
+            //                                                ${items?.product_detail?.name}
+            //                                             </h3>
+            //                                             <p style="padding: 16px 0 ;">
+            //                                                 Giá : ${items?.product_detail?.price?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }
+            //                                             </p>
+            //                                             <div
+            //                                                 style="display: flex;align-items: center;gap:8px;justify-content:space-between;">
+            //                                                 <div style="display: flex; align-items: center;gap: 6px;">
+            //                                                     <h4 style="padding: 8px 0;">
+            //                                                         Số lượng:
+            //                                                     </h4>
+            //                                                     <span class="total">
+            //                                                         ${items?.quantity}
+            //                                                     </span>
+
+            //                                                 </div>
+                                                   
+            //                                             </div>
+            //                                         </div>
+            //                                         <div style="text-align: end;padding-right: unset;width: 35%;">
+            //                                             <span
+            //                                                 style=" font-size: 1.4rem;font-weight: 600;color: orange;">
+            //                                                 <span>
+            //                                                     ${items?.into_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }
+            //                                                 </span>
+            //                                         </div>
+            //                                     </div>
+            //                                     <div style="margin: 20px 0;height: 1px;width: 100%;border: 1px; border-style: dashed;"
+            //                                         class="col">
+            //                                     </div>
+            //                                 </div>
+            //                             </div>
+            //                                     `
+            //                                 )}
+            //                         </div>
+
+
+            //                         <div style=" width: 30%;align-items: center;text-align: center;">
+            //                             <h4>Tổng tiền</h4>
+            //                             <h4 style="margin-top: 32px;color: orange;">${item?.into_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }</h4>
+
+            //                         </div>
+            //                     </div>
+
+            //                 </div>
+            //             </div>
+            //       `
+            // })
+            localStorage.setItem('list-order-bill', JSON.stringify(e?.data))
+            renderOrderBill(e?.data)
+            // data.innerHTML = 
+        })
+        .catch((error) => {
+            console.error('Đã xảy ra lỗi khi gọi API.', error);
+        });
+}
+
+function filterOrderBill(i){
+    const data = JSON.parse(localStorage.getItem('list-order-bill'));
+        for(let k =0 ;k<3;k++){
+            document.getElementsByClassName('filter')[k].style.backgroundColor = 'rgb(212, 200, 32)'
+        }
+    if (i === 0 || i === 1){
+        document.getElementsByClassName('filter')[i+1].style.backgroundColor = '#00CC66';
+        
+    } else document.getElementsByClassName('filter')[0].style.backgroundColor = '#00CC66'
+    if(i){
+      renderOrderBill(data?.filter((item) => (item?.status === i)))  
+    }else{
+        return renderOrderBill(data)
+    }
+   
+}
+
+function renderOrderBill (e){
+    const id_user = JSON.parse(localStorage.getItem('user_Info'))
+    let data = document.getElementById('list-order-bill');
+
+    document.getElementById('user-name').innerText = 'Họ tên: ' + id_user?.full_name;
+    document.getElementById('user-phone').innerText = 'Số điện thoại: ' + id_user?.phone_number;
+    document.getElementById('user-address').innerText = 'Địa chỉ: ' + id_user?.address;
+    document.getElementById('user-email').innerText = 'Email: ' + id_user?.email;
+    data.innerHTML = '';
+    e.map((item) => {
+        data.innerHTML +=
+            `
+                  <div style="padding: 16px;background-color: azure;border-radius: 10px;margin-top: 16px;">
+                            <div
+                                style="display: flex;justify-content: space-between;padding-bottom: 8px;border-bottom: 1px solid rgb(158, 139, 139);">
+                                <span style="font-weight: 600;">
+                                    Đơn hàng
+                                </span>
+                                <span style="font-weight: 500;">
+                                    ${item?.status ? 'Đã nhận' : 'Chưa nhận'}
+                                </span>
+                            </div>
+                            <div style="padding-top: 16px;">
+                                <div style="display: flex;">
+                                    <div style="display: block;width: 78%;">
+                                            ${item?.order_detail.map((items) =>
+                `
+                                                <div style="width: 100%;">
+                                            <div>
+                                                <div style="display: flex;">
+                                                    <div style="width: 30%;">
+                                                        <img src=${items?.product_detail?.image} />
+                                                    </div>
+
+                                                    <div style="width: 100%;padding: 0 32px;">
+                                                        <h3>
+                                                           ${items?.product_detail?.name}
+                                                        </h3>
+                                                        <p style="padding: 16px 0 ;">
+                                                            Giá : ${items?.product_detail?.price?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                                        </p>
+                                                        <div
+                                                            style="display: flex;align-items: center;gap:8px;justify-content:space-between;">
+                                                            <div style="display: flex; align-items: center;gap: 6px;">
+                                                                <h4 style="padding: 8px 0;">
+                                                                    Số lượng:
+                                                                </h4>
+                                                                <span class="total">
+                                                                    ${items?.quantity}
+                                                                </span>
+
+                                                            </div>
+                                                   
+                                                        </div>
+                                                    </div>
+                                                    <div style="text-align: end;padding-right: unset;width: 35%;">
+                                                        <span
+                                                            style=" font-size: 1.4rem;font-weight: 600;color: orange;">
+                                                            <span>
+                                                                ${items?.into_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                                <div style="margin: 20px 0;height: 1px;width: 100%;border: 1px; border-style: dashed;"
+                                                    class="col">
+                                                </div>
+                                            </div>
+                                        </div>
+                                                `
+            )}
+                                    </div>
+
+
+                                    <div style=" width: 30%;align-items: center;text-align: center;">
+                                        <h4>Tổng tiền</h4>
+                                        <h4 style="margin-top: 32px;color: orange;">${item?.into_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</h4>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                  `
+    })
+}
+
+
 function submitForm() {
     let userInput = document.getElementById("textInput").value;
     console.log("Bạn vừa nhập: " + userInput);
@@ -645,8 +847,25 @@ function closeForm() {
 }
 
 
+function activeFormLogin(a){
+    const user = JSON.parse(localStorage.getItem('user_info'));
+  if(a){
+        document.getElementById('login').style.display = 'none'
+  }else{
+      if (!user) {
+          window.location.href = './Singlemenu.html'
+      } else {
+          document.getElementById('login').style.display = 'block'
+      }
+  }
+}
 
 
+function logOut (){
+    localStorage.removeItem('user_Info');
+    localStorage.removeItem('savedListProduct');
+    window.location.href = './index.html'
+}
 // 
 /*<div style="position: absolute;bottom: -70px; padding: 6px 12px;border-radius: 4px;background-color: white;">
     <p style="padding: 4px 0;cursor: pointer;">Đen</p>

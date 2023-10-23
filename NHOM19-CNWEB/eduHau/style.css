@@ -17,7 +17,7 @@ body {
     /* height: 100dvh; */
     background: linear-gradient(45deg, #ffff66, #66ffcc);
     /* background: linear-gradient(45deg, #FFFFCC, #CCFFFF); */
-    background-repeat: no-repeat;
+    background-repeat:repeat;
 }
 
 footer p {
