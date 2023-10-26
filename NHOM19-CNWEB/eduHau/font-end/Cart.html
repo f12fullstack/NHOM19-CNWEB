@@ -8,8 +8,8 @@
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/1429/1429951.png">
     <link rel="stylesheet" href="../style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body onload="renderOrder()" style="height: 100hv;"> 
@@ -26,10 +26,8 @@
             margin: 0 auto;
             flex-wrap: wrap;
            ">
-            <a style="padding-right: 10%;"
-                href="./index.html"
-            >
-                <div
+            <div style="padding-right: 10%;">
+                <a href="./index.html"
                     style="margin-left: 50px;display: flex;flex-direction:row;align-items: center;gap: 6px;position: relative;max-width: fit-content;">
                     <img style="width: 36px;height: 36px;" src="https://cdn-icons-png.flaticon.com/512/1429/1429951.png" />
     
@@ -40,88 +38,79 @@
                         style="font-family: 'Roboto Slab', serif;font-size: 1.9rem;font-weight: 600;color:  #fcb500;position: absolute;right: -32px;top: 3px;">19</i>
                     <i
                         style="font-family: 'Roboto Slab', serif;font-size: 0.5rem;font-weight: 600;color:  #fcb500;position: absolute;right: 0;bottom: -0.5px;">20cn5</i>
-                </div>
-            </a>
+                </a>
+            </div>
     
             <div
                 style="display: flex;align-items: center;position: relative;justify-content: space-between;background-color: white;padding: 0 10px;gap: 10px;border-radius: 6px;height: 34px;flex: auto;">
-                <input type="text" style="width: 100%;height: 34px;border:none;border-radius: 8px; outline: none;"
+                <input id="search-input" type="text"
+                    style="width: 100%;height: 34px;border:none;border-radius: 8px; outline: none;"
                     placeholder="Bạn cần gì..." />
-                <img style="width: 26px;height: 26px;"
+    
+                <img onclick="searchNameProduct()" style="width: 26px;height: 26px;"
                     src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/search-512.png" />
             </div>
             <div style="display: flex;justify-content:center;gap: 16px;flex: auto;">
-                <a class="item-nav" href="./Singlemenu.html">
-                    <img src="https://www.hotelbooqi.com/wp-content/uploads/2021/12/128-1280406_view-user-icon-png-user-circle-icon-png.png"
+                <a class="item-nav" onclick="activeFormLogin()">
+                    <img src="https://didongviet.vn/svg/Header/user.svg"
                         width="26" height="26" />
-                    <span>
+                    <span style="color: white;">
                         Tài khoản & đơn hàng
                     </span>
                 </a>
                 <a href="./Cart.html" class="item-nav">
-                    <img src="https://cdn-icons-png.flaticon.com/512/625/625230.png" width="26" height="26" />
-                    <span>
+                    <img src="https://didongviet.vn/svg/Header/cart.svg" width="26" height="26" />
+                    <span style="color: white;">
                         Giỏ hàng
                     </span>
                 </a>
-                <div class="item-nav">
-                    <img src="https://cdn-icons-png.flaticon.com/512/455/455705.png" width="26" height="26" />
-                    <span>
-                        24h Công nghệ
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="hello"
-            style="display: flex;background-color:rgb(36, 142, 36);align-items:center;justify-content: center;align-items: center;gap: 6px;position: relative;z-index: 10;">
-            <span class="btn-nav btn-test">
-                Điện thoại
-            </span>
-            <span class="btn-nav">
-                Điện thoại
-            </span>
-            <span class="btn-nav">
-                Điện thoại
-            </span>
-            <span class="btn-nav">
-                Điện thoại
-            </span>
+      
     
-            <div class="container-nav">
-                <div style="width: 30%;">
-                    <h4 style="padding-top: 8px;padding-bottom: 6px;">
-                        Hãng sản phẩm
-                    </h4>
-                    <div class="list-drop" style="display: flex;flex-wrap: wrap;">
-                        <p style="width: 33%;">SamSung</p>
-                        <p style="width: 33%;">SamSung</p>
-                        <p style="width: 33%;">SamSung</p>
-                        <p style="width: 33%;">SamSung</p>
-                        <p style="width: 33%;">SamSung</p>
+                <div id="login" style="display: none;">
+                    <div
+                        style="width: 30%;height: 270px;background-color:bisque;border-radius: 10px; position: absolute;top: 35dvh;left: 34%;z-index: 10000;">
+                        <div style="width: 100%;display: flex;justify-content: end;padding: 3px 6px;">
+                            <img onclick="activeFormLogin(10)"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flat_cross_icon.svg/768px-Flat_cross_icon.svg.png"
+                                style="width: 24px;height: 24px;left: unset; right: 0;" />
+                        </div>
+                        <h3 style="text-align: center;margin-bottom: 16px;">Đăng nhập</h3>
+                        <div style="width: 100%;align-items: center;padding: 0px 52px;">
+                            <h4>
+                                Số điện thoại
+                            </h4>
+                            <input style="width: 100%;margin: 10px 0;" placeholder="Nhập số điện thoại" />
+                        </div>
+                        <div style="width: 100%;align-items: center;padding: 0 52px;">
+                            <h4>
+                                Mật khẩu
+                            </h4>
+                            <input style="width: 100%;margin: 10px 0;" placeholder="Nhập nhật khẩu" />
+                        </div>
+                        <div style="display: flex;justify-content: center;margin-top: 10px;">
+                            <p
+                                style="border: 1px solid rgb(100, 250, 100);width: fit-content;padding: 10px 12px;border-radius: 6px;">
+                                Đăng nhập</p>
+                        </div>
                     </div>
-    
-                </div>
-                <div
-                    style="width: 20%;border: 1px solid rgba(0, 0, 0, 0.2);padding: 0 10px;border-bottom: 0;border-top: 0;">
-                    <h4 style="padding: 10px 0;">
-                        Mức giá
-                    </h4>
-                    <p>Dưới 2 triệu</p>
-                    <p>Từ 2 - 4 triệu</p>
-                    <p>Từ 2 - 4 triệu</p>
-                    <p>Từ 2 - 4 triệu</p>
-                    <p>Từ 2 - 4 triệu</p>
-                    <p>Từ 2 - 4 triệu</p>
-                </div>
-                <div style="width: 40%;padding: 0 10px;">
-                    <h4 style="padding: 10px 0;">
-                        Hãng sản phẩm
-                    </h4>
-                    <img style="width: 50%;"
-                        src="https://images.fpt.shop/unsafe/fit-in/248x248/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/8/30/638290066446778426_H4.png" />
                 </div>
             </div>
         </div>
+        <!-- <div class="hello"
+                style="display: flex;background-color:rgb(36, 142, 36);align-items:center;justify-content: center;align-items: center;gap: 6px;position: relative;z-index: 10;">
+                <span class="btn-nav btn-test">
+                    Điện thoại
+                </span>
+                <span class="btn-nav">
+                    Laptop
+                </span>
+                <span class="btn-nav">
+                    PC
+                </span>
+                <span class="btn-nav">
+                    iPad
+                </span> -->
+        <!-- </div> -->
     </header>
     <div class="container" style="padding: 32px 0; ">
         <div style="display: flex;justify-content: space-between;">
@@ -143,7 +132,7 @@
                         <h3>Thành tiền</h3>
                         <span id="total_amount" style="font-size: 1.3rem;color: orange;font-weight: 600;">0 VND</span>
                     </div>
-                            <div id="myForm" style="display: none;border: 1px solid gray;padding: 16px;border-radius: 8px;">
+                            <div id="myForm" style="display: none;border: 1px solid gray;padding: 16px;border-radius: 8px;margin-top: 16px;background-color: aliceblue;">
                                 <h3>Thông tin người đặt hàng</h3>
                                 <form onsubmit="return submitForm();">
                                     <div class="container-item">
@@ -194,7 +183,11 @@
             </div>
         </div>
     </div>
-    
+    <footer style="background-color: #fcb500;width: 100%;padding: 16px 0;margin-top: 32px;position: absolute;bottom: 0;">
+        <p style="text-align: center; color: rgb(143, 132, 132);padding: 0;">Sản phẩm công nghệ web thương mại , thuộc
+            nhóm 19 20CN5</p>
+        <p style="text-align: center; color: rgb(143, 132, 132);padding: 0;">Trường đại học Kiến Trúc Hà Nội </p>
+    </footer>
    
     <script src="./javascript.js">
 

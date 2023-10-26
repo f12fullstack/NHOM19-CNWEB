@@ -1,6 +1,6 @@
 let currentIndex = 0;
 const slides = document.querySelectorAll('.slide');
-
+const checkBox = [0,1,2,3,4,5,6,7,8,9,10,11]
 function showSlide(index) {
     slides.forEach((slide, i) => {
         if (i === index) {
@@ -89,9 +89,10 @@ function handleDownTotal(index) {
 }
 function renderOrder() {
     var dataItemsListOrder = JSON.parse(localStorage.getItem('savedListProduct'));
-    document.getElementById('list-order').innerHTML=''
+    document.getElementById('list-order').innerHTML = '';
     var totalAmount = 0;
     document.getElementById("btn-order").style.display = "none";
+    
     console.log(dataItemsListOrder);
     (dataItemsListOrder | dataItemsListOrder.length !== 0) ?
         dataItemsListOrder.map((item, index) => {
@@ -136,7 +137,7 @@ function renderOrder() {
                                             </h4>
                                             <div style="display: flex;align-items: center;gap:8px;position: relative;" class>
                                                 <p
-                                                    style="cursor: pointer;text-align: center;width: 60px;background-color: rgba(224, 197, 197,0.5); border-radius: 4px; border: 1px solid rgb(101, 93, 93);">
+                                                    style="cursor: pointer;text-align: center;width: fit-content;background-color: rgba(224, 197, 197,0.5);padding: 4px 8px; border-radius: 4px; border: 1px solid rgb(101, 93, 93);">
                                                     ${item.color}
                                                 </p>
                                                 
@@ -170,25 +171,30 @@ function renderOrder() {
                         src="https://bizweb.dktcdn.net/100/360/810/themes/732049/assets/empty-cart.png?1669015697083.png"
                     />`
     document.getElementById('total_amount').innerHTML = totalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + ' VNĐ'
+    
+    
     localStorage.setItem('saveTotalAmount', totalAmount);
 }
 
 function handleOrder() {
-
+    // localStorage.removeItem('savedListProduct')
     var dataItemsOrder = JSON.parse(localStorage.getItem('savedListProduct'));
     var array = JSON.parse(localStorage.getItem('savedProductDetail'));
+    var indexColor = JSON.parse(localStorage.getItem('savedProductColor'))
     var configData = {
         nameProduct: array.name,
         price: array.price,
-        image: array.image,
-        color: array.color[JSON.parse(localStorage.getItem('savedProductColor'))].name,
+        image: array.color[indexColor].image_link.split(',')[0],
+        color: array.color[indexColor].name,
         dataApi: {
             into_money: array.price,
             product_detail_id: array.id,
-            quantity: 1
+            quantity: 1,
+            color: array.color[indexColor].image_link.split(',')[0],
         }
 
     }
+    // localStorage.setItem('savedListProduct', JSON.stringify(configData));
     if (dataItemsOrder) {
         dataItemsOrder = [...dataItemsOrder, configData]
         localStorage.setItem('savedListProduct', JSON.stringify(dataItemsOrder));
@@ -231,10 +237,23 @@ function handleOrder() {
 function renderDetail(value, image) {
     var array = JSON.parse(localStorage.getItem('savedData'));
     var nameProduct = JSON.parse(localStorage.getItem('savedNameProduct'));
+    const params = new URLSearchParams(window.location.search);
+    const id_ca = params.get('category_id')
+    console.log('mmmmmmmmmm',id_ca);
     const dataItem = array[value];
     localStorage.setItem('savedProductDetail', JSON.stringify(dataItem));
     localStorage.setItem('savedProductColor', (image));
     // console.log('TTTTTTTTTTTTTTTTT', dataItem.ram.name);4
+    const link = document.getElementById('link-current')
+    link.innerHTML = `<a href="./ListProduct.html?param2=${id_ca}">/ ${param1}</a> 
+                    <span>/ ${param2}</span>`
+    document.getElementById('noi-bat').innerHTML =
+    `
+        <img
+                    width="100%"
+                   
+                    src=${dataItem?.image} />
+    `
     document.getElementById('assess-product').innerText = `Đánh giá chi tiết ${nameProduct + ' ' + dataItem.rom.name}`;
     document.getElementById('assess-detail').innerText = dataItem.description;
     document.getElementById('name-product').innerHTML = nameProduct + ' ' + dataItem.rom.name;
@@ -295,35 +314,39 @@ function renderDetail(value, image) {
             <table class="one-line-border">
                 <tr>
                     <th>Màn hình</th>
-                    <th>${dataItem.screen}</th>
+                    <th>${dataItem?.screen}</th>
                 </tr>
-                <tr>
+                <tr style="display: ${id_ca == 1 ? 'flex-block' : 'none'};">
                     <td>Camera sau</td>
-                    <td>${dataItem.camera}</td>
+                    <td>${dataItem?.camera}</td>
                 </tr>
-                <tr>
+                <tr style="display: ${id_ca == 1 ? 'flex-block' : 'none'};">
                     <th>Camera Selfie</th>
-                    <th>${dataItem.cameraSelf}</th>
+                    <th>${dataItem?.cameraSelf}</th>
                 </tr>
                 <tr>
                     <td>RAM</td>
-                     <td>${dataItem.ram.name}</td>
+                     <td>${dataItem?.ram?.name}</td>
                 </tr>
                 <tr>
-                    <th>Bộ nhớ trong</th>
-                     <th>${dataItem.rom.name}</th>
+                    <th>${id_ca == 1 ? 'Bộ nhớ trong' : 'Ổ cứng'}</th>
+                     <th>${dataItem?.rom?.name}</th>
                 </tr>
                 <tr>
                     <td>CPU</td>
-                    <td>${dataItem.chip}</td>
+                    <td>${dataItem?.chip}</td>
                 </tr>
                 <tr>
                     <th>Dung lượng pin</th>
-                    <th>${dataItem.battery}</th>
+                    <th>${dataItem?.battery}</th>
                 </tr>
                 <tr>
                     <td>Hệ điều hành</td>
-                    <td>${dataItem.os.name}</td>
+                    <td>${dataItem?.os?.name}</td>
+                </tr>
+                <tr style="display: ${id_ca != 1 ? 'flex-block' : 'none'};">
+                    <th>Card đồ họa</th>
+                    <th>${dataItem?.card?.name}</th>
                 </tr>
             </table>
     `;
@@ -336,6 +359,8 @@ function callAPIDetail() {
         .then((e) => {
             localStorage.setItem('savedData', JSON.stringify(e.data.product_detail));
             localStorage.setItem('savedNameProduct', JSON.stringify(e.data.name));
+            document.getElementById('assess').innerText = e?.data?.description
+            // localStorage.setItem('savedNameProduct', JSON.stringify(e.data.name));
             renderDetail(0, 0)
 
         })
@@ -345,15 +370,18 @@ function callAPIDetail() {
         });
 }
 
+function onClickRamProduct(indexItem,a){
+    const dataBase = JSON.parse(localStorage.getItem('data-base'));
+    document.getElementsByClassName('cart-product')[indexItem].innerHTML = renderProductReduce(dataBase[indexItem],a,indexItem)
+    // console.log(item);
+    // console.log(a);
+}
 
-
-function renderProduct(item, a) {
-
-    console.log('123',);
+function renderProductReduce(item, a, indexPro) {
 
     return (
         `
-                 <div id= ${item.title} class="cart-product col-4 col-md-4" style="gap: 0;"
+                 <div class ="cart-products"
                 >
                     <a style="
                             width: 100%;
@@ -362,7 +390,92 @@ function renderProduct(item, a) {
                             padding-bottom: 5%;
                             align-items: center;
                             " 
-                            href="./ProductDetail.html?param1=${item.category.name}&param2=${item.branch.name}&id_product=${item.id}"
+                            href="./ProductDetail.html?param1=${item?.category?.name}&param2=${item?.branch?.name}&id_product=${item?.id}&category_id=${item?.category?.id}"
+                            >
+                        <img class="img-product"
+                            src=${item?.image} />
+                    </a>
+                    <div
+                        style="width: 100%;padding: 16px;padding-top: 0;display: flex;flex-direction: column;gap: 6px;">
+                        <div>
+                            <p style="font-size: 0.9rem;font-weight: 600;color: #474C51;">
+                                ${item?.name} ${item?.product_detail[a]?.rom?.name}
+                            </p>
+                        </div>
+                        <div style="display: flex;border-radius: 4px;background-color: #F1F2F4;justify-content: space-between;"
+                            >
+
+                             ${item?.product_detail?.map((item_, index) =>
+            `                   
+                                <div onclick="onClickRamProduct(${indexPro},${index})"
+                                    style="align-items: center;text-align: center;padding: 6px 0;flex: auto;border-radius: 6px;cursor: pointer; background-color:  ${index === a ? '#2C313A' : '#F1F2F4'}">
+                                    <p style="font-size: 0.8rem;font-weight: 600;color:${index === a ? 'white' : '#474C51'};"> ${item_?.rom?.name} </p>
+                                </div>
+                                 `
+        ).join('')}
+                        </div>
+
+                        <div>
+                            <p style="font-size: 1.1rem;font-weight: 600;color: #EF8573;">
+                              ${item?.product_detail[a]?.price?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
+                            </p>
+                        </div>
+                        <div style="display: flex;flex-wrap: wrap;gap: 8px;">
+                            <div style="display: flex; align-items: center;gap: 2px;text-align: left;">
+                                <i style="color: #C5CAD3;" class='bx bx-chip'></i>
+                                <span style="font-size: 0.7rem;">
+                                    ${item?.product_detail[a]?.chip}
+                                </span>
+                            </div>
+                            <div style="display: flex; align-items: center;gap: 2px;text-align: left;">
+                                <i style="color: #C5CAD3;" class='bx bx-mobile'></i>
+                                <span style="font-size: 0.7rem;">
+                                    ${item?.product_detail[a]?.screen?.slice(0, 8)}
+                                </span>
+                            </div>
+
+                            <div style="display: flex; align-items: center;gap: 2px;text-align: left;">
+                                <i style="color: #C5CAD3;" class='bx bxs-microchip'></i>
+                                <span style="font-size: 0.7rem;">
+                                    ${item?.product_detail[a]?.ram?.name}
+                                </span>
+                            </div>
+                            <div style="display: flex; align-items: center;gap: 2px;text-align: left;">
+                                <i style="color: #C5CAD3;" class='bx bxs-hdd'></i>
+                                <span style="font-size: 0.7rem;">
+                                    ${item?.product_detail[a]?.rom?.name}
+                                </span>
+                            </div>
+                        </div>
+                        <a  
+                            href="./ProductDetail.html?param1=Điện thoại&param2=SamSung&id_product=${item?.id}"
+                            style="padding:8px 10px;background-color: #EA3323;width:fit-content;border-radius: 6px;margin-top: 8px;"
+                        >
+                            <span style="font-size: 1rem;color: white;font-weight: 600;">
+                                Mua ngay
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                    `
+    )
+}
+function renderProduct(item, a, indexPro) {
+
+    
+
+    return (
+        `
+                 <div class="cart-product col-4 col-md-4" style="gap: 0;"
+                >
+                    <a style="
+                            width: 100%;
+                            border-radius: 6px;
+                            padding: 10%;
+                            padding-bottom: 5%;
+                            align-items: center;
+                            " 
+                            href="./ProductDetail.html?param1=${item.category.name}&param2=${item.branch.name}&id_product=${item.id}&category_id=${item?.category?.id}"
                             >
                         <img class="img-product"
                             src=${item.image} />
@@ -379,7 +492,7 @@ function renderProduct(item, a) {
 
                              ${item.product_detail.map((item_, index) =>
             `                   
-                                <div
+                                <div onclick="onClickRamProduct(${indexPro},${index})"
                                     style="align-items: center;text-align: center;padding: 6px 0;flex: auto;border-radius: 6px;cursor: pointer; background-color:  ${index === a ? '#2C313A' : '#F1F2F4'}">
                                     <p style="font-size: 0.8rem;font-weight: 600;color:${index === a ? 'white' : '#474C51'};"> ${item_.rom.name} </p>
                                 </div>
@@ -389,7 +502,7 @@ function renderProduct(item, a) {
 
                         <div>
                             <p style="font-size: 1.1rem;font-weight: 600;color: #EF8573;">
-                              
+                              ${item?.product_detail[a]?.price?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }
                             </p>
                         </div>
                         <div style="display: flex;flex-wrap: wrap;gap: 8px;">
@@ -421,7 +534,7 @@ function renderProduct(item, a) {
                         </div>
                         <a  
                             href="./ProductDetail.html?param1=Điện thoại&param2=SamSung&id_product=${item.id}"
-                            style="padding:8px 10px;background-color: #fcb500;width:fit-content;border-radius: 6px;margin-top: 8px;"
+                            style="padding:8px 10px;background-color: #EA3323;width:fit-content;border-radius: 6px;margin-top: 8px;"
                         >
                             <span style="font-size: 1rem;color: white;font-weight: 600;">
                                 Mua ngay
@@ -439,9 +552,10 @@ function callAPI() {
             console.log(e.data);
 
             let data = document.getElementById('promotion');
-            e.data.map((item) => {
+            localStorage.setItem('data-base',JSON.stringify(e.data))
+            e.data.map((item,index) => {
                 data.innerHTML +=
-                    renderProduct(item, 0)
+                    renderProduct(item, 0,index)
             })
             // data.innerHTML = 
         })
@@ -452,9 +566,29 @@ function callAPI() {
 //   ${ item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") } VNĐ
 
 
+function searchNameProduct(){
+    const dataBase = JSON.parse(localStorage.getItem('data-base'));
+    let value = document.getElementById('search-input').value;
+    document.getElementById('clean-3').innerHTML=''
+    document.getElementById('clean-2').innerHTML = ''
+    document.getElementById('clean-1').innerHTML = ''
+    const dataNew = dataBase.filter(name => name?.name?.toLowerCase().includes(value.toLowerCase()));
+    let data = document.getElementById('promotion');
+    data.innerHTML=''
+    dataNew.map((item) => {
+        data.innerHTML +=
+            renderProduct(item, 0)
+    })
+}
 
 
-function renderProductCategory(item, a) {
+function onClickRamProductCategory(indexItem, a) {
+    const dataBasess = JSON.parse(localStorage.getItem('data-list-category'));
+    document.getElementsByClassName('cart-product')[indexItem].innerHTML = renderProductReduce(dataBasess[indexItem], a, indexItem)
+    // console.log(item);
+    // console.log(a);
+}
+function renderProductCategory(item, a,indexPro) {
 
     return (
         `
@@ -467,7 +601,7 @@ function renderProductCategory(item, a) {
                             padding-bottom: 5%;
                             align-items: center;
                             " 
-                            href="./ProductDetail.html?param1=${item.category.name}&param2=${item.branch.name}&id_product=${item.id}">
+                            href="./ProductDetail.html?param1=${item.category.name}&param2=${item.branch.name}&id_product=${item.id}&category_id=${item?.category?.id}">
     
                         <img class="img-product"
                             src=${item.image} />
@@ -484,7 +618,7 @@ function renderProductCategory(item, a) {
 
                              ${item.product_detail.map((item_, index) =>
             `                   
-                                <div
+                                <div onclick="onClickRamProductCategory(${indexPro},${index})"
                                    
                                     style="align-items: center;text-align: center;padding: 6px 0;flex: auto;border-radius: 6px;cursor: pointer; background-color:  ${index === a ? '#2C313A' : '#F1F2F4'}">
                                     <p style="font-size: 0.8rem;font-weight: 600;color:${index === a ? 'white' : '#474C51'};"> ${item_.rom.name} </p>
@@ -495,7 +629,7 @@ function renderProductCategory(item, a) {
 
                         <div>
                             <p style="font-size: 1.1rem;font-weight: 600;color: #EF8573;">
-                              
+                              ${item?.product_detail[0]?.price?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }
                             </p>
                         </div>
                         <div style="display: flex;flex-wrap: wrap;gap: 8px;">
@@ -527,7 +661,7 @@ function renderProductCategory(item, a) {
                         </div>
                         <a  
                             href="./ProductDetail.html?param1=Điện thoại&param2=SamSung&id_product=${item.id}"
-                            style="padding:8px 10px;background-color: #fcb500;width:fit-content;border-radius: 6px;margin-top: 8px;"
+                            style="padding:8px 10px;background-color: #EA3323;width:fit-content;border-radius: 6px;margin-top: 8px;"
                         >
                             <span style="font-size: 1rem;color: white;font-weight: 600;">
                                 Mua ngay
@@ -539,15 +673,56 @@ function renderProductCategory(item, a) {
     )
 }
 
+
+function filterListProApi(x,y,z){
+    const branch = ['Samsung', 'iphone', 'Oppo', 'xiaomi', 'Realme','']
+    const price = [{ a: 0, b: 1000000000 }, { a: 0, b: 5000000 }, { a: 5000000, b: 10000000 }, { a: 10000000, b: 20000000 }, { a: 20000000, b: 36000000 }, { a: 36000000, b: 1000000000 }]
+
+    checkBox.map((index) => {
+        if (index === x) {
+            document.getElementsByClassName('check-box')[index].innerHTML = `<img style="width: 15px;height: 15px;"  src='https://icons-for-free.com/iconfiles/png/512/check+checkbox+checkmark+confirm+success+yes+icon-1320196711226060446.png' />`
+        } else document.getElementsByClassName('check-box')[index].innerHTML = ''
+    })
+    console.log(price[y].b);
+
+    axios.get(`http://localhost:8080/products?maxPrice=${price[y].b}&minPrice=${price[y].a}&name=${branch[z]}`)
+        .then((e) => {
+            console.log('ssssssssssssssss',e.data);
+         
+            localStorage.setItem('data-list-category',JSON.stringify(e?.data))
+            let data = document.getElementById('list-product-category');
+            data.innerHTML='';
+   
+            e.data.map((item,index) => {
+                data.innerHTML +=
+                    renderProductCategory(item, 0,index)
+            })
+            // data.innerHTML = 
+        })
+        .catch((error) => {
+            console.error('Đã xảy ra lỗi khi gọi API.', error);
+        });
+}
+
 function callAPIListProductCategory() {
-    axios.get("http://localhost:8080/products/category/1")
+    const params = new URLSearchParams(window.location.search);
+    const param3 = params.get('param2');
+    const paramsss = params.get('param1');
+    document.getElementById('name-hang').innerText = paramsss;
+    console.log(param3);
+    axios.get(`http://localhost:8080/products/category/${param3}`)
         .then((e) => {
             console.log(e.data);
-
+            checkBox.map((index)=>{
+               if(index === 0 || index ===6){
+                   document.getElementsByClassName('check-box')[index].innerHTML = `<img style="width: 15px;height: 15px;"  src='https://icons-for-free.com/iconfiles/png/512/check+checkbox+checkmark+confirm+success+yes+icon-1320196711226060446.png' />`
+               }
+            })
+            localStorage.setItem('data-list-category',JSON.stringify(e?.data))
             let data = document.getElementById('list-product-category');
-            e.data.map((item) => {
+            e.data.map((item,index) => {
                 data.innerHTML +=
-                    renderProductCategory(item, 0)
+                    renderProductCategory(item, 0,index)
             })
             // data.innerHTML = 
         })
@@ -565,13 +740,11 @@ async function callAPICreateUser() {
         address: diaChi,
         email: emailInput,
         full_name: hoTen,
-        id: 0,
         password: '',
-        phone: soDienThoai,
+        phoneNumber: soDienThoai,
         role_id: 2
     }
     // console.log('in',infoUser);
-
     await axios.post("http://localhost:8080/users", infoUser)
         .then((e) => {
             console.log('sss', e);
@@ -590,18 +763,21 @@ async function callAPICreateOrder() {
     let dataBody = JSON.parse(localStorage.getItem('savedListProduct'));
     var dataList = dataBody.map((item) => item.dataApi);
     let user = JSON.parse(localStorage.getItem('user_Info'));
+    // console.log(JSON.parse(localStorage.getItem('saveTotalAmount')));
     // console.log(JSON.parse(localStorage.getItem('total_amount')));
+    console.log('nnnnnnnn',dataList[0]);
     var body = {
         orderDetail: dataList,
         status: 0,
-        total_amount: JSON.parse(localStorage.getItem('saveTotalAmount')),
+        // total_money: JSON.parse(localStorage.getItem('saveTotalAmount')),
         user_id: user.id
     }
     await axios.post("http://localhost:8080/orders", body)
         .then((e) => {
             console.log('dd',e);
             console.log(e.data);
-            localStorage.removeItem('savedListProduct')
+            localStorage.setItem('savedListProduct',JSON.stringify([]))
+            // localStorage.setItem('saveTotalAmount',0)
             renderOrder();
             // localStorage.setItem('user_Info', JSON.stringify(e.data))
         })
@@ -618,7 +794,7 @@ function openForm() {
             let user = JSON.parse(localStorage.getItem('user_Info'));
             if (user) {
                 document.getElementById("ho_ten").value = user.full_name;
-                document.getElementById("so_dien_thoai").value = user.address;
+                document.getElementById("so_dien_thoai").value = user.phoneNumber;
                 document.getElementById('email').value = user.email;
                 document.getElementById("dia_chi").value = user.address;
             } 
@@ -626,11 +802,11 @@ function openForm() {
        
     } else {
         console.log("123");
-        callAPICreateUser();
+            callAPICreateUser();
 
-        callAPICreateOrder();
-        alert("Đặt hàng thành công!");
-            window.location.href='./Singlemenu.html'
+            callAPICreateOrder();
+            alert("Đặt hàng thành công!");
+            window.location.href = './Singlemenu.html'
             console.log("1234");
             // localStorage.removeItem('user_Info')
     }
@@ -640,6 +816,7 @@ function callAPIgetOrder(){
 
     const id_user = JSON.parse(localStorage.getItem('user_Info'))
     console.log(id_user.id);
+    console.log(id_user);
     axios.get(`http://localhost:8080/orders/${id_user.id}`)
         .then((e) => {
             // console.log(e.data);
@@ -737,7 +914,7 @@ function callAPIgetOrder(){
 function filterOrderBill(i){
     const data = JSON.parse(localStorage.getItem('list-order-bill'));
         for(let k =0 ;k<3;k++){
-            document.getElementsByClassName('filter')[k].style.backgroundColor = 'rgb(212, 200, 32)'
+            document.getElementsByClassName('filter')[k].style.backgroundColor = 'white'
         }
     if (i === 0 || i === 1){
         document.getElementsByClassName('filter')[i+1].style.backgroundColor = '#00CC66';
@@ -756,14 +933,14 @@ function renderOrderBill (e){
     let data = document.getElementById('list-order-bill');
 
     document.getElementById('user-name').innerText = 'Họ tên: ' + id_user?.full_name;
-    document.getElementById('user-phone').innerText = 'Số điện thoại: ' + id_user?.phone_number;
+    document.getElementById('user-phone').innerText = 'Số điện thoại: ' + id_user?.phoneNumber;
     document.getElementById('user-address').innerText = 'Địa chỉ: ' + id_user?.address;
     document.getElementById('user-email').innerText = 'Email: ' + id_user?.email;
     data.innerHTML = '';
     e.map((item) => {
         data.innerHTML +=
             `
-                  <div style="padding: 16px;background-color: azure;border-radius: 10px;margin-top: 16px;">
+                  <div style="padding: 16px;background-color: white;border-radius: 10px;margin-top: 16px;">
                             <div
                                 style="display: flex;justify-content: space-between;padding-bottom: 8px;border-bottom: 1px solid rgb(158, 139, 139);">
                                 <span style="font-weight: 600;">
@@ -782,7 +959,7 @@ function renderOrderBill (e){
                                             <div>
                                                 <div style="display: flex;">
                                                     <div style="width: 30%;">
-                                                        <img src=${items?.product_detail?.image} />
+                                                        <img src=${items?.color} />
                                                     </div>
 
                                                     <div style="width: 100%;padding: 0 32px;">
@@ -851,11 +1028,11 @@ function closeForm() {
 
 
 function activeFormLogin(a){
-    const user = JSON.parse(localStorage.getItem('user_info'));
+    const user = JSON.parse(localStorage.getItem('user_Info'));
   if(a){
         document.getElementById('login').style.display = 'none'
   }else{
-      if (!user) {
+      if (user) {
           window.location.href = './Singlemenu.html'
       } else {
           document.getElementById('login').style.display = 'block'
@@ -868,6 +1045,23 @@ function logOut (){
     localStorage.removeItem('user_Info');
     localStorage.removeItem('savedListProduct');
     window.location.href = './index.html'
+}
+
+
+async function logIn(){
+    const a = document.getElementById('phone-login').value;
+    const b = document.getElementById('pass-login').value;
+
+    await axios.post("http://localhost:8080/users", { phoneNumber: a, password :b})
+        .then((e) => {
+         console.log(e);
+            document.getElementById('login').style.display = 'none'
+            // localStorage.setItem('user_Info', JSON.stringify(e.data))
+        })
+        .catch((error) => {
+            console.error('Đã xảy ra lỗi khi gọi API.', error);
+        });
+
 }
 // 
 /*<div style="position: absolute;bottom: -70px; padding: 6px 12px;border-radius: 4px;background-color: white;">
