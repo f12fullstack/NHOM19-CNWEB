@@ -793,13 +793,11 @@ async function callAPICreateOrder() {
     let dataBody = JSON.parse(localStorage.getItem('savedListProduct'));
     var dataList = dataBody.map((item) => item.dataApi);
     let user = JSON.parse(localStorage.getItem('user_Info'));
-    // console.log(JSON.parse(localStorage.getItem('saveTotalAmount')));
-    // console.log(JSON.parse(localStorage.getItem('total_amount')));
+    
     console.log('nnnnnnnn',dataList[0]);
     var body = {
         orderDetail: dataList,
         status: 0,
-        // total_money: JSON.parse(localStorage.getItem('saveTotalAmount')),
         user_id: user.id
     }
     await axios.post("http://localhost:8080/orders", body)
@@ -807,7 +805,6 @@ async function callAPICreateOrder() {
             console.log('dd',e);
             console.log(e.data);
             localStorage.setItem('savedListProduct',JSON.stringify([]))
-            // localStorage.setItem('saveTotalAmount',0)
             renderOrder();
             // localStorage.setItem('user_Info', JSON.stringify(e.data))
         })
@@ -815,8 +812,8 @@ async function callAPICreateOrder() {
             console.error('Đã xảy ra lỗi khi gọi API.', error);
         });
 }
-
-function openForm() {
+  
+async function openForm() {
     if (document.getElementById("myForm").style.display !== "block") {
         let dataItemsListOrder = JSON.parse(localStorage.getItem('savedListProduct'))
         if (dataItemsListOrder | dataItemsListOrder.length !== 0){
@@ -833,10 +830,12 @@ function openForm() {
     } else {
         console.log("123");
             callAPICreateUser();
-
+        setTimeout(()=>{
             callAPICreateOrder();
             alert("Đặt hàng thành công!");
             window.location.href = './Singlemenu.html'
+        },2000)
+          
             console.log("1234");
             // localStorage.removeItem('user_Info')
     }
@@ -947,10 +946,12 @@ function filterOrderBill(i){
             document.getElementsByClassName('filter')[k].style.backgroundColor = 'white'
         }
     if (i === 0 || i === 1){
-        document.getElementsByClassName('filter')[i+1].style.backgroundColor = '#00CC66';
+        document.getElementsByClassName('filter')[i + 1].style.backgroundColor = '#66CCFF';
         
-    } else document.getElementsByClassName('filter')[0].style.backgroundColor = '#00CC66'
-    if(i){
+    } else document.getElementsByClassName('filter')[0].style.backgroundColor = '#66CCFF';
+    // console.log('mm', data[0]?.status === i);
+    // console.log(i);
+    if(i=== 0 || i === 1){
       renderOrderBill(data?.filter((item) => (item?.status === i)))  
     }else{
         return renderOrderBill(data)
@@ -1033,7 +1034,7 @@ function renderOrderBill (e){
 
                                     <div style=" width: 30%;align-items: center;text-align: center;">
                                         <h4>Tổng tiền</h4>
-                                        <h4 style="margin-top: 32px;color: orange;">${item?.total_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</h4>
+                                        <h4 style="margin-top: 32px;color: orange;font-size: 1.5rem;">${item?.total_money?.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}</h4>
 
                                     </div>
                                 </div>
