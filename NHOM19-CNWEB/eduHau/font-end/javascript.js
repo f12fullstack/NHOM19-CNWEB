@@ -1,6 +1,7 @@
 let currentIndex = 0;
 const slides = document.querySelectorAll('.slide');
-const checkBox = [0,1,2,3,4,5,6,7,8,9,10,11]
+const checkBox = [0,1,2,3,4,5]
+const checkBoxPrice = [0, 1, 2, 3, 4, 5]
 function showSlide(index) {
     slides.forEach((slide, i) => {
         if (i === index) {
@@ -673,23 +674,45 @@ function renderProductCategory(item, a,indexPro) {
     )
 }
 
+ async function filterListProApi(y,z){
+    // var valueY = await localStorage.getItem('value-y')
+    // var valueY = await localStorage.getItem('value-y')
+    // var valueY = 0
+     const params = new URLSearchParams(window.location.search);
+     const param3 = params.get('param2');
+    if (y != -1){
+        await localStorage.setItem('value-y',y)
+    }else {
+        y = await localStorage.getItem('value-y')
+    }
 
-function filterListProApi(x,y,z){
-    const branch = ['Samsung', 'iphone', 'Oppo', 'xiaomi', 'Realme','']
+     if (z != -1) {
+         await localStorage.setItem('value-z', z)
+     } else {
+         z = await localStorage.getItem('value-z')
+     }
+    const branch = ['','Samsung', 'iphone', 'Oppo', 'xiaomi', 'Realme']
     const price = [{ a: 0, b: 1000000000 }, { a: 0, b: 5000000 }, { a: 5000000, b: 10000000 }, { a: 10000000, b: 20000000 }, { a: 20000000, b: 36000000 }, { a: 36000000, b: 1000000000 }]
 
     checkBox.map((index) => {
-        if (index === x) {
-            document.getElementsByClassName('check-box')[index].innerHTML = `<img style="width: 15px;height: 15px;"  src='https://icons-for-free.com/iconfiles/png/512/check+checkbox+checkmark+confirm+success+yes+icon-1320196711226060446.png' />`
-        } else document.getElementsByClassName('check-box')[index].innerHTML = ''
+        
+        if (index == y) {
+            document.getElementsByClassName('check-box')[index+6].innerHTML = `<img style="width: 15px;height: 15px;"  src='https://icons-for-free.com/iconfiles/png/512/check+checkbox+checkmark+confirm+success+yes+icon-1320196711226060446.png' />`
+        } else document.getElementsByClassName('check-box')[index+6].innerHTML = ''
     })
+    checkBoxPrice.map((index) => {
+
+         if (index == z) {
+             document.getElementsByClassName('check-box')[index].innerHTML = `<img style="width: 15px;height: 15px;"  src='https://icons-for-free.com/iconfiles/png/512/check+checkbox+checkmark+confirm+success+yes+icon-1320196711226060446.png' />`
+         } else document.getElementsByClassName('check-box')[index].innerHTML = ''
+     })
     console.log(price[y].b);
 
-    axios.get(`http://localhost:8080/products?maxPrice=${price[y].b}&minPrice=${price[y].a}&name=${branch[z]}`)
-        .then((e) => {
+     axios.get(`http://localhost:8080/products?maxPrice=${price[y].b}&minPrice=${price[y].a}&name=${branch[z]}&category=${param3}`)
+        .then(async (e) => {
             console.log('ssssssssssssssss',e.data);
          
-            localStorage.setItem('data-list-category',JSON.stringify(e?.data))
+           await localStorage.setItem('data-list-category',JSON.stringify(e?.data))
             let data = document.getElementById('list-product-category');
             data.innerHTML='';
    
@@ -704,20 +727,27 @@ function filterListProApi(x,y,z){
         });
 }
 
-function callAPIListProductCategory() {
+async function callAPIListProductCategory() {
     const params = new URLSearchParams(window.location.search);
     const param3 = params.get('param2');
     const paramsss = params.get('param1');
     document.getElementById('name-hang').innerText = paramsss;
     console.log(param3);
-    axios.get(`http://localhost:8080/products/category/${param3}`)
+    await axios.get(`http://localhost:8080/products/category/${param3}`)
         .then((e) => {
             console.log(e.data);
             checkBox.map((index)=>{
-               if(index === 0 || index ===6){
+               if(index === 0){
                    document.getElementsByClassName('check-box')[index].innerHTML = `<img style="width: 15px;height: 15px;"  src='https://icons-for-free.com/iconfiles/png/512/check+checkbox+checkmark+confirm+success+yes+icon-1320196711226060446.png' />`
                }
             })
+            checkBoxPrice.map((index) => {
+                if (index === 0) {
+                    document.getElementsByClassName('check-box')[index+6].innerHTML = `<img style="width: 15px;height: 15px;"  src='https://icons-for-free.com/iconfiles/png/512/check+checkbox+checkmark+confirm+success+yes+icon-1320196711226060446.png' />`
+                }
+            })
+            localStorage.setItem('value-y',0)
+            localStorage.setItem('value-z', 0)
             localStorage.setItem('data-list-category',JSON.stringify(e?.data))
             let data = document.getElementById('list-product-category');
             e.data.map((item,index) => {
